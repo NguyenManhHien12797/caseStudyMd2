@@ -1,0 +1,10 @@
+package model_Manager;
+
+public interface IManager <E>{
+    void display();
+    void delete(int id);
+    void add(E e);
+    void editName(int id, String editName);
+    void editPrice(int id, double price);
+    void editBrand(int id, String branhd);
+}
