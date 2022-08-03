@@ -9,33 +9,60 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class UserManager<E> implements Serializable {
+public class UserManager implements Serializable, Manager {
     private final String PATH_FILE_USER = "user.dat";
     private final String PATH_FILE_ACCOUNT_USER= "account_user.data";
-    private ArrayList<E> usersList;
+    private ArrayList<User> usersList;
 
-    private final IOFile<E> ioFileBinary = new IOFileBinary<E>() {
+
+    private final IOFile<User> ioFileBinary = new IOFileBinary<User>() {
 };
 
-    public UserManager() throws IOException {
-        File file = new File(PATH_FILE_USER);
+    public UserManager(String path) throws IOException {
+        File file = new File(path);
         if (!file.exists()) {
             file.createNewFile();
         }
         if (file.length() == 0) {
             usersList = new ArrayList<>();
         } else {
-            usersList = ioFileBinary.readFile(PATH_FILE_USER);
+            usersList = ioFileBinary.readFile(path);
         }
     }
 
-    public void addUser(E e){
-        usersList.add(e);
-        ioFileBinary.writeFile(PATH_FILE_USER,usersList);
+
+
+    public int size(){
+       return usersList.size();
     }
 
-    public void displayUser(){
-        usersList = ioFileBinary.readFile(PATH_FILE_USER);
+    @Override
+    public void add(Object o, String path) {
+
+        usersList.add((User) o);
+        ioFileBinary.writeFile(path,usersList);
+    }
+
+    @Override
+    public void edit(Object o, String path) {
+
+    }
+
+    @Override
+    public void remove(String str, String path) {
+        usersList.removeIf(p -> p.getId().equals(str));
+        ioFileBinary.writeFile(path,usersList);
+    }
+
+    @Override
+    public void removeAll(String path) {
+        usersList.clear();
+       ioFileBinary.writeFile(path,usersList);
+
+    }
+
+    public void display(String path){
+        usersList = ioFileBinary.readFile(path);
         if(usersList.isEmpty()){
             System.out.println("Chưa có thông tin người dùng nào đăng ký!");
         }else {

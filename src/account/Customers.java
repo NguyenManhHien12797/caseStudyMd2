@@ -1,5 +1,5 @@
 package account;
 
-public class Customers {
+public class Customers extends User{
 
 }

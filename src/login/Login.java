@@ -1,6 +1,7 @@
 package login;
 
 import account.AccountUser;
+import account.AccountUserManager;
 import account.User;
 import account.UserManager;
 import validate.Validate;
@@ -11,11 +12,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Login  {
+    private int num=0;
+    private final String PATH_FILE_USER = "user.dat";
+    private final String PATH_FILE_ACCOUNT_USER= "account_user.data";
 
     private Scanner scanner = new Scanner(System.in);
     private Validate validate = new Validate();
 
-    private UserManager userManager = new UserManager();
+    private UserManager userManager = new UserManager(PATH_FILE_USER);
+    private AccountUserManager accountUserManager = new AccountUserManager(PATH_FILE_ACCOUNT_USER);
     public Login() throws IOException {
     }
 
@@ -33,11 +38,12 @@ public class Login  {
 
         AccountUser accountUser = new AccountUser(account,password);
         User user = new User(id,name,address,phoneNumber,email);
-        userManager.addUser(user);
+        userManager.add(user,PATH_FILE_USER);
+        accountUserManager.add(accountUser,PATH_FILE_ACCOUNT_USER);
     }
 
     public String getId(){
-        String id = "";
+        String id = "USER"+userManager.size()+1 ;
         return id;
     }
 

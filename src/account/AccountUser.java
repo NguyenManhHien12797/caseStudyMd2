@@ -1,6 +1,9 @@
 package account;
 
-public class AccountUser {
+import java.io.Serializable;
+
+public class AccountUser implements Serializable {
+    private static final long serialVersionUID = 7448605884491568546L;
     private String account;
     private String password;
 
@@ -23,5 +26,13 @@ public class AccountUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountUser{" +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
