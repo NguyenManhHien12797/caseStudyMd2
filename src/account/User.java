@@ -1,23 +1,26 @@
 package account;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class User {
+
+public class User implements Serializable {
+    private final long serialVersionUID = -266706354210367639L;
     private String id;
     private String name;
     private String address;
     private String phone;
-    private Date dateTime;
+    private String email;
 
-    public User(String id, String name, String address,
-                String phone, Date dateTime) {
+    public User() {
+    }
+
+    public User(String id, String name, String address, String phone, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.dateTime = dateTime;
+        this.email = email;
     }
-
 
     public String getId() {
         return id;
@@ -51,12 +54,22 @@ public class User {
         this.phone = phone;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
