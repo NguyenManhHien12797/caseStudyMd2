@@ -10,16 +10,19 @@ import java.util.ArrayList;
 
 
 public class UserManager implements Serializable, Manager {
-    private final String PATH_FILE_USER = "fileData/user.dat";
+    private static final String PATH_FILE_USER = "fileData/user.dat";
 
     private ArrayList<User> usersList;
 
+    //Sử dụng Singleton pattern để tạo đối tượng UserManager duy nhất
 
-//    private final IOFile<User> ioFileBinary = new IOFileBinary<User>()
+    private static UserManager instance = null;
+
+
     private final IOFile<User> ioFileBinary= IOFileBinary.getInstance();{
 };
 
-    public UserManager(String path) throws IOException {
+    private UserManager(String path) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.createNewFile();
@@ -29,6 +32,11 @@ public class UserManager implements Serializable, Manager {
         } else {
             usersList = ioFileBinary.readFile(path);
         }
+    }
+
+    public static UserManager getInstance() throws IOException {
+        if(instance == null) instance =new UserManager(PATH_FILE_USER);
+        return instance;
     }
 
 

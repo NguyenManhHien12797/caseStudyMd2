@@ -19,7 +19,7 @@ public class Register {
     private Scanner scanner = new Scanner(System.in);
     private Validate validate = new Validate();
 
-    private UserManager userManager = new UserManager(PATH_FILE_USER);
+    private UserManager userManager = UserManager.getInstance();
     private AccountUserManager accountUserManager = AccountUserManager.getInstance();
 
     public Register() throws IOException {

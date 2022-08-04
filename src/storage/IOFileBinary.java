@@ -7,13 +7,13 @@ public class IOFileBinary<E> implements Serializable,IOFile<E> {
 
     // Sử dụng Singleton design pattern để tạo 1 đối tượng đọc ghi file duy nhất
 
-    private static IOFile instance = null;
+    private static IOFileBinary instance = null;
 
     private IOFileBinary(){
 
     }
 
-    public static IOFile getInstance(){
+    public static IOFileBinary getInstance(){
         if(instance == null) instance = new IOFileBinary();
         return instance;
     }

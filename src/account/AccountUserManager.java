@@ -11,8 +11,9 @@ import java.util.ArrayList;
 public class AccountUserManager implements Manager{
     private static final String PATH_FILE_ACCOUNT_USER= "fileData/account_user.dat";
     private ArrayList<AccountUser> accounUserstList;
-//    private final IOFile<AccountUser> ioFileBinary = new IOFileBinary<>();
     private final IOFile<AccountUser> ioFileBinary= IOFileBinary.getInstance();
+
+    //Sử dụng Singleton pattern để tạo đối tượng AccountUserManager duy nhất
     private static AccountUserManager instance = null;
 
     private AccountUserManager(String path) throws IOException {
