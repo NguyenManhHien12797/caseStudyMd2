@@ -1,9 +1,6 @@
 package login_register;
 
-import account.AccountUser;
-import account.AccountUserManager;
-import account.User;
-import account.UserManager;
+import account.*;
 import validate.Validate;
 
 
@@ -21,6 +18,7 @@ public class Register {
 
     private UserManager userManager = UserManager.getInstance();
     private AccountUserManager accountUserManager = AccountUserManager.getInstance();
+
 
     public Register() throws IOException {
     }

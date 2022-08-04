@@ -1,5 +1,8 @@
 package account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface Manager<E> {
     void add(E e);
     void edit(E e);
@@ -10,4 +13,5 @@ public interface Manager<E> {
     void display();
 
     int size();
+
 }

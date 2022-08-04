@@ -5,21 +5,24 @@ import storage.IOFileBinary;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AccountAdminManager implements  Manager{
-    private final String PATH_FILE_ACCOUNT_USER= "fileData/account_user.dat";
+public class AccountAdminManager implements Manager {
+    private static final String PATH_FILE_ACCOUNT_ADMIN = "fileData/account_admin.dat";
     private ArrayList<AccountAdmin> accountAdminList;
-    private final IOFile<AccountAdmin> ioFileBinary= IOFileBinary.getInstance();
+    private final IOFile<AccountAdmin> ioFileBinary = IOFileBinary.getInstance();
+
+    private static AccountAdminManager instance = null;
 
     public void AccountAdmin() {
         accountAdminList.add(new AccountAdmin("ADMIN1", "123456"));
         accountAdminList.add(new AccountAdmin("ADMIN2", "123456"));
         accountAdminList.add(new AccountAdmin("ADMIN3", "123456"));
-        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accountAdminList);
+        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_ADMIN, accountAdminList);
     }
 
-    public AccountAdminManager(String path) throws IOException {
+    private AccountAdminManager(String path) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.createNewFile();
@@ -31,10 +34,15 @@ public class AccountAdminManager implements  Manager{
         }
     }
 
+    public static AccountAdminManager getInstance() throws IOException {
+        if (instance == null) instance = new AccountAdminManager(PATH_FILE_ACCOUNT_ADMIN);
+        return instance;
+    }
+
     @Override
     public void add(Object o) {
         accountAdminList.add((AccountAdmin) o);
-        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accountAdminList);
+        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_ADMIN, accountAdminList);
     }
 
     @Override
@@ -45,21 +53,21 @@ public class AccountAdminManager implements  Manager{
     @Override
     public void remove(String str) {
         accountAdminList.removeIf(p -> p.getAccountAdmin().equals(str));
-        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accountAdminList);
+        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_ADMIN, accountAdminList);
     }
 
     @Override
     public void removeAll() {
         accountAdminList.clear();
-        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accountAdminList);
+        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_ADMIN, accountAdminList);
     }
 
     @Override
     public void display() {
-        accountAdminList = ioFileBinary.readFile(PATH_FILE_ACCOUNT_USER);
-        if(accountAdminList.isEmpty()){
+        accountAdminList = ioFileBinary.readFile(PATH_FILE_ACCOUNT_ADMIN);
+        if (accountAdminList.isEmpty()) {
             System.out.println("Chưa có thông tin người dùng nào đăng ký!");
-        }else {
+        } else {
             accountAdminList.forEach(System.out::println);
         }
     }
@@ -68,4 +76,9 @@ public class AccountAdminManager implements  Manager{
     public int size() {
         return 0;
     }
+
+    public ArrayList<AccountAdmin> getAccountAdminList() {
+        return accountAdminList;
+    }
+
 }

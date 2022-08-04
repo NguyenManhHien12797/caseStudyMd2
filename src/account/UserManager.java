@@ -7,9 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class UserManager implements Serializable, Manager {
+public class UserManager<E> implements Serializable, Manager<E> {
     private static final String PATH_FILE_USER = "fileData/user.dat";
 
     private ArrayList<User> usersList;
@@ -44,6 +45,7 @@ public class UserManager implements Serializable, Manager {
     public int size(){
        return usersList.size();
     }
+
 
     @Override
     public void add(Object o) {
