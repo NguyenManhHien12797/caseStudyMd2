@@ -12,6 +12,11 @@ public class VietlottManager implements IManager{
     }
 
     @Override
+    public void deleteAll() {
+
+    }
+
+    @Override
     public void add(Object o) {
 
     }

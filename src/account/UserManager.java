@@ -10,12 +10,13 @@ import java.util.ArrayList;
 
 
 public class UserManager implements Serializable, Manager {
-    private final String PATH_FILE_USER = "user.dat";
-    private final String PATH_FILE_ACCOUNT_USER= "account_user.data";
+    private final String PATH_FILE_USER = "fileData/user.dat";
+
     private ArrayList<User> usersList;
 
 
-    private final IOFile<User> ioFileBinary = new IOFileBinary<User>() {
+//    private final IOFile<User> ioFileBinary = new IOFileBinary<User>()
+    private final IOFile<User> ioFileBinary= IOFileBinary.getInstance();{
 };
 
     public UserManager(String path) throws IOException {
@@ -37,32 +38,32 @@ public class UserManager implements Serializable, Manager {
     }
 
     @Override
-    public void add(Object o, String path) {
+    public void add(Object o) {
 
         usersList.add((User) o);
-        ioFileBinary.writeFile(path,usersList);
+        ioFileBinary.writeFile(PATH_FILE_USER,usersList);
     }
 
     @Override
-    public void edit(Object o, String path) {
+    public void edit(Object o) {
 
     }
 
     @Override
-    public void remove(String str, String path) {
+    public void remove(String str) {
         usersList.removeIf(p -> p.getId().equals(str));
-        ioFileBinary.writeFile(path,usersList);
+        ioFileBinary.writeFile(PATH_FILE_USER,usersList);
     }
 
     @Override
-    public void removeAll(String path) {
+    public void removeAll() {
         usersList.clear();
-       ioFileBinary.writeFile(path,usersList);
+       ioFileBinary.writeFile(PATH_FILE_USER,usersList);
 
     }
 
-    public void display(String path){
-        usersList = ioFileBinary.readFile(path);
+    public void display( ){
+        usersList = ioFileBinary.readFile(PATH_FILE_USER);
         if(usersList.isEmpty()){
             System.out.println("Chưa có thông tin người dùng nào đăng ký!");
         }else {

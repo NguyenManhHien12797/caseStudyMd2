@@ -9,55 +9,66 @@ import java.util.ArrayList;
 
 
 public class AccountUserManager implements Manager{
-    private ArrayList<AccountUser> accountList;
-    private final IOFile<AccountUser> ioFileBinary = new IOFileBinary<>();
+    private static final String PATH_FILE_ACCOUNT_USER= "fileData/account_user.dat";
+    private ArrayList<AccountUser> accounUserstList;
+//    private final IOFile<AccountUser> ioFileBinary = new IOFileBinary<>();
+    private final IOFile<AccountUser> ioFileBinary= IOFileBinary.getInstance();
+    private static AccountUserManager instance = null;
 
-    public AccountUserManager(String path) throws IOException {
+    private AccountUserManager(String path) throws IOException {
         File file = new File(path);
         if (!file.exists()) {
             file.createNewFile();
         }
         if (file.length() == 0) {
-            accountList = new ArrayList<>();
+            accounUserstList = new ArrayList<>();
         } else {
-            accountList = ioFileBinary.readFile(path);
+            accounUserstList = ioFileBinary.readFile(path);
         }
     }
+    public static AccountUserManager getInstance() throws IOException {
+        if(instance == null) instance = new AccountUserManager(PATH_FILE_ACCOUNT_USER);
+        return instance;
+    }
     @Override
-    public void add(Object o, String path) {
-        accountList.add((AccountUser) o);
-        ioFileBinary.writeFile(path,accountList);
+    public void add(Object o) {
+        accounUserstList.add((AccountUser) o);
+        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accounUserstList);
     }
 
     @Override
-    public void edit(Object o, String path) {
+    public void edit(Object o) {
 
     }
 
     @Override
-    public void remove(String str, String path) {
-        accountList.removeIf(p -> p.getAccount().equals(str));
-        ioFileBinary.writeFile(path,accountList);
+    public void remove(String str) {
+        accounUserstList.removeIf(p -> p.getAccount().equals(str));
+        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accounUserstList);
     }
 
     @Override
-    public void removeAll(String path) {
-        accountList.clear();
-        ioFileBinary.writeFile(path,accountList);
+    public void removeAll() {
+        accounUserstList.clear();
+        ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accounUserstList);
     }
 
     @Override
-    public void display(String path) {
-        accountList = ioFileBinary.readFile(path);
-        if(accountList.isEmpty()){
+    public void display( ) {
+        accounUserstList = ioFileBinary.readFile(PATH_FILE_ACCOUNT_USER);
+        if(accounUserstList.isEmpty()){
             System.out.println("Chưa có thông tin người dùng nào đăng ký!");
         }else {
-            accountList.forEach(System.out::println);
+            accounUserstList.forEach(System.out::println);
         }
     }
 
     @Override
     public int size() {
         return 0;
+    }
+
+    public ArrayList<AccountUser> getAccounUserstList() {
+        return accounUserstList;
     }
 }

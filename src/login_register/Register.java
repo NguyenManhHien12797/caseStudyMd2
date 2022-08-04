@@ -1,4 +1,4 @@
-package login;
+package login_register;
 
 import account.AccountUser;
 import account.AccountUserManager;
@@ -11,17 +11,18 @@ import java.io.IOException;
 
 import java.util.Scanner;
 
-public class Login  {
-    private int num=0;
-    private final String PATH_FILE_USER = "user.dat";
-    private final String PATH_FILE_ACCOUNT_USER= "account_user.data";
+public class Register {
+    private final String PATH_FILE_USER = "fileData/user.dat";
+    private final String PATH_FILE_ACCOUNT_USER= "fileData/account_user.dat";
+    private final String PATH_FILE_ACCOUNT_ADMIN= "fileData/account_.dat";
 
     private Scanner scanner = new Scanner(System.in);
     private Validate validate = new Validate();
 
     private UserManager userManager = new UserManager(PATH_FILE_USER);
-    private AccountUserManager accountUserManager = new AccountUserManager(PATH_FILE_ACCOUNT_USER);
-    public Login() throws IOException {
+    private AccountUserManager accountUserManager = AccountUserManager.getInstance();
+
+    public Register() throws IOException {
     }
 
     public void registerAccountUser() {
@@ -38,8 +39,8 @@ public class Login  {
 
         AccountUser accountUser = new AccountUser(account,password);
         User user = new User(id,name,address,phoneNumber,email);
-        userManager.add(user,PATH_FILE_USER);
-        accountUserManager.add(accountUser,PATH_FILE_ACCOUNT_USER);
+        userManager.add(user);
+        accountUserManager.add(accountUser);
     }
 
     public String getId(){
@@ -51,6 +52,10 @@ public class Login  {
         String account;
         System.out.print("Nhập account: ");
         String inputAccount = scanner.nextLine();
+        if(checkAccount(inputAccount)){
+            System.out.println("Account đã tồn tại, vui lòng đăng ký tên khác");
+            inputAccount = scanner.nextLine();
+        }
         while (true) {
             if (!validate.validateAccount(inputAccount)) {
                 System.out.println("Mời nhập lại: ");
@@ -62,6 +67,17 @@ public class Login  {
             }
         }
         return account;
+    }
+
+    public boolean checkAccount(String account){
+        boolean isvaild = false;
+        for(int i=0; i< accountUserManager.getAccounUserstList().size(); i++){
+            String acc= accountUserManager.getAccounUserstList().get(i).getAccount();
+            if(acc.equals(account)){
+                isvaild= true;
+            } else isvaild= false;
+        }
+        return isvaild;
     }
 
     public String registerPassword() {
@@ -115,4 +131,6 @@ public class Login  {
         }
         return email;
     }
+
+
 }

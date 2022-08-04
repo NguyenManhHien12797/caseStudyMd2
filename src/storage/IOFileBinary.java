@@ -4,6 +4,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class IOFileBinary<E> implements Serializable,IOFile<E> {
+
+    // Sử dụng Singleton design pattern để tạo 1 đối tượng đọc ghi file duy nhất
+
+    private static IOFile instance = null;
+
+    private IOFileBinary(){
+
+    }
+
+    public static IOFile getInstance(){
+        if(instance == null) instance = new IOFileBinary();
+        return instance;
+    }
     public void writeFile(String path, ArrayList<E> o){
         try{
             FileOutputStream fos = new FileOutputStream(path);
