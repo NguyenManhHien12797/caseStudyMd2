@@ -2,15 +2,23 @@ package login_register;
 
 import account.AccountAdminManager;
 import account.AccountUserManager;
+import model_Manager.ConfectioneryManager;
+
+import run.RunByAdmin;
+import run.RunByUser;
+
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Login {
+public class Login{
     private AccountUserManager accountUserManager = AccountUserManager.getInstance();
     private AccountAdminManager accountAdminManager = AccountAdminManager.getInstance();
     private final Register register = new Register();
 
+    ConfectioneryManager confectioneryManager = ConfectioneryManager.getInstance();
+   private final RunByUser runByUser = new RunByUser();
+   private final RunByAdmin runByAdmin = new RunByAdmin();
 
     public Login() throws IOException {
     }
@@ -66,10 +74,12 @@ public class Login {
     public void loginUser(String account, String password) {
         if (checkAccountUser(account, password)) {
             //gọi ra menuUser
-            menuUser();
+            runByUser.menuUser();
 
         } else {
             System.out.println("Nhập sai rồi");
+            System.out.println("Mời nhập lại");
+            login();
         }
 
 
@@ -78,14 +88,13 @@ public class Login {
     public void loginAdmin(String account, String password) {
         if (checkAccountAdmin(account, password)) {
             //gọi ra memuAdmin
-            menuAdmin();
+            runByAdmin.menuAdmin();
 
         } else {
             System.out.println("Nhập sai rồi");
-
+            System.out.println("Mời nhập lại");
+            login();
         }
-//        }
-
     }
 
 
@@ -108,111 +117,4 @@ public class Login {
         }
         return false;
     }
-
-
-    public void menuAdmin() {
-        try {
-            do {
-                System.out.println("Menu Admin");
-                System.out.println("1. Thêm sản phẩm");
-                System.out.println("2. Sửa info");
-                System.out.println("3. Xóa sản phẩm");
-                System.out.println("4. Hiền thị sản phẩm");
-                System.out.println("5. Thông tin khách hàng");
-                System.out.println("6. Doanh thu sản phẩm");
-                System.out.println("0. Đăng xuất");
-                System.out.print("Mời bạn nhập lựa chọn: ");
-                Scanner scanner = new Scanner(System.in);
-                int choice = scanner.nextInt();
-                switch (choice) {
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        break;
-                    case 3:
-
-                        break;
-                    case 4:
-
-                        break;
-                    case 5:
-
-                        break;
-                    case 6:
-
-                        break;
-                    case 7:
-
-                        break;
-                    case 0:
-                        System.out.println("Đã thoát khỏi hệ thống USER !!!");
-                        System.out.println("----------------------------------------------------");
-                        menuLogin();
-                        break;
-                    default:
-                        System.out.println("[❌] Nhập sai lựa chọn, thử lại");
-                        break;
-                }
-            } while (true);
-        } catch (Exception e) {
-            System.out.println("[❌] Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------------");
-        }
-    }
-
-    public void menuUser() {
-        try {
-            do {
-                System.out.println("Menu User");
-                System.out.println("1. Hiển thị sản phẩm trong shop");
-                System.out.println("2. Tìm kiếm sản phẩm trong shop");
-                System.out.println("3. Thêm sản phẩm vào giỏ hàng");
-                System.out.println("4. Xóa sản phẩm khỏi giỏ hàng");
-                System.out.println("5. Hiển thị sản phẩm trong giỏ hàng");
-                System.out.println("6. Thanh toán");
-                System.out.println("7. Lịch sử mua hàng");
-                System.out.println("0. Đăng xuất");
-                System.out.print("Mời bạn nhập lựa chọn: ");
-                Scanner scanner = new Scanner(System.in);
-                int choice = Integer.parseInt(scanner.nextLine());
-                switch (choice) {
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        break;
-                    case 3:
-
-                        break;
-                    case 4:
-
-                        break;
-                    case 5:
-
-                        break;
-                    case 6:
-
-                        break;
-                    case 7:
-
-                        break;
-                    case 0:
-                        System.out.println(" Đã thoát khỏi hệ thống USER !!!");
-                        System.out.println("----------------------------------------------------");
-                        menuLogin();
-                        break;
-                    default:
-                        System.out.println("Nhập sai lựa chọn, thử lại");
-                        break;
-                }
-            } while (true);
-        } catch (Exception e) {
-            System.out.println("Bạn đã nhập sai dữ liệu! Vui lòng nhập lại!");
-            System.out.println("---------------------------------------------------");
-        }
-    }
-
 }

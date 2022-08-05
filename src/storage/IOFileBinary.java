@@ -3,7 +3,7 @@ package storage;
 import java.io.*;
 import java.util.ArrayList;
 
-public class IOFileBinary<E> implements Serializable,IOFile<E> {
+public class IOFileBinary<E> implements IOFile<E> {
 
     // Sử dụng Singleton design pattern để tạo 1 đối tượng đọc ghi file duy nhất
 

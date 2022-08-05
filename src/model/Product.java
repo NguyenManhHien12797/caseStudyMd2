@@ -12,6 +12,10 @@ public abstract class Product {
         this.brand = brand;
     }
 
+    public Product() {
+
+    }
+
     public int getId() {
         return id;
     }

@@ -1,87 +1,99 @@
 package model_Manager;
 
-import account.AccountUser;
-import account.User;
 import model.Confectionery;
-import model.Product;
 import storage.IOFile;
 import storage.IOFileBinary;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ConfectioneryManager implements Serializable,IManager{
-    private final String PATH_CONFECTIONERY= "confectionery.dat";
+public class ConfectioneryManager implements IManager<Confectionery> {
+    private final String PATH_CONFECTIONERY = "fileData/confectionery.dat";
     private ArrayList<Confectionery> confectionerytList;
-    private final IOFile<Confectionery> ioFileBinary= IOFileBinary.getInstance();
-    {
-    };
+    private final IOFile<Confectionery> ioFileBinary = IOFileBinary.getInstance();
 
-    public ConfectioneryManager(String path) throws IOException{
-        File file = new File(path);
+
+    private static ConfectioneryManager instance = null;
+
+    private ConfectioneryManager() throws IOException {
+        File file = new File(PATH_CONFECTIONERY);
         if (!file.exists()) {
             file.createNewFile();
         }
         if (file.length() == 0) {
             confectionerytList = new ArrayList<>();
         } else {
-            confectionerytList = ioFileBinary.readFile(path);
+            confectionerytList = ioFileBinary.readFile(PATH_CONFECTIONERY);
         }
     }
+
+    public static ConfectioneryManager getInstance() throws IOException {
+        if (instance == null) instance = new ConfectioneryManager();
+        return instance;
+    }
+
     @Override
     public void display() {
         confectionerytList = ioFileBinary.readFile(PATH_CONFECTIONERY);
-        if(confectionerytList.isEmpty()){
+        if (confectionerytList.isEmpty()) {
             System.out.println("Chưa có sản phẩm nào!");
-        }else {
+        } else {
             confectionerytList.forEach(System.out::println);
         }
     }
 
     @Override
     public void delete(int id) {
-        confectionerytList.removeIf(p -> p.getId()==(id));
-        ioFileBinary.writeFile(PATH_CONFECTIONERY,confectionerytList);
+        confectionerytList.removeIf(p -> p.getId() == id);
+        ioFileBinary.writeFile(PATH_CONFECTIONERY, confectionerytList);
     }
 
     @Override
     public void deleteAll() {
         confectionerytList.clear();
-        ioFileBinary.writeFile(PATH_CONFECTIONERY,confectionerytList);
+        ioFileBinary.writeFile(PATH_CONFECTIONERY, confectionerytList);
     }
 
     @Override
-    public void add(Object o) {
-        confectionerytList.add((Confectionery) o);
-        ioFileBinary.writeFile(PATH_CONFECTIONERY,confectionerytList);
+    public void add(Confectionery o) {
+        confectionerytList.add(o);
+        ioFileBinary.writeFile(PATH_CONFECTIONERY, confectionerytList);
     }
 
     @Override
     public void editName(int id, String editName) {
-    for(Product p: confectionerytList){
-        if(p.getId()==id){
-            p.setName(editName);
+        for (Confectionery p : confectionerytList) {
+            if (p.getId() == id) {
+                p.setName(editName);
+            }
         }
-    }
     }
 
     @Override
     public void editPrice(int id, double price) {
-    for(Product p: confectionerytList){
-        if(p.getId()==id){
-            p.setPrice(price);
+        for (Confectionery p : confectionerytList) {
+            if (p.getId() == id) {
+                p.setPrice(price);
+            }
         }
-    }
     }
 
     @Override
     public void editBrand(int id, String brand) {
-        for(Product p: confectionerytList){
-            if(p.getId()==id){
+        for (Confectionery p : confectionerytList) {
+            if (p.getId() == id) {
                 p.setBrand(brand);
             }
         }
+    }
+
+
+    public int size() {
+        return confectionerytList.size();
+    }
+
+    public ArrayList<Confectionery> getConfectionerytList() {
+        return confectionerytList;
     }
 }

@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Register {
-    private final String PATH_FILE_USER = "fileData/user.dat";
-    private final String PATH_FILE_ACCOUNT_USER= "fileData/account_user.dat";
-    private final String PATH_FILE_ACCOUNT_ADMIN= "fileData/account_.dat";
 
     private Scanner scanner = new Scanner(System.in);
     private Validate validate = new Validate();

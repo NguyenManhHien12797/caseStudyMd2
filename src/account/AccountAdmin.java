@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class AccountAdmin implements Serializable {
     private static final long serialVersionUID = -4333316296251054416L;
+
     private String accountAdmin;
     private String passwordAdmin;
 

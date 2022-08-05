@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class AccountUserManager implements Manager{
+public class AccountUserManager implements Manager<AccountUser>{
     private static final String PATH_FILE_ACCOUNT_USER= "fileData/account_user.dat";
     private ArrayList<AccountUser> accounUserstList;
     private final IOFile<AccountUser> ioFileBinary= IOFileBinary.getInstance();
@@ -32,13 +32,13 @@ public class AccountUserManager implements Manager{
         return instance;
     }
     @Override
-    public void add(Object o) {
-        accounUserstList.add((AccountUser) o);
+    public void add(AccountUser o) {
+        accounUserstList.add( o);
         ioFileBinary.writeFile(PATH_FILE_ACCOUNT_USER, accounUserstList);
     }
 
     @Override
-    public void edit(Object o) {
+    public void edit(AccountUser o) {
 
     }
 

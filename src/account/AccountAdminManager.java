@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AccountAdminManager implements Manager {
+public class AccountAdminManager implements Manager<AccountAdmin> {
     private static final String PATH_FILE_ACCOUNT_ADMIN = "fileData/account_admin.dat";
     private ArrayList<AccountAdmin> accountAdminList;
     private final IOFile<AccountAdmin> ioFileBinary = IOFileBinary.getInstance();
@@ -40,13 +40,13 @@ public class AccountAdminManager implements Manager {
     }
 
     @Override
-    public void add(Object o) {
-        accountAdminList.add((AccountAdmin) o);
+    public void add(AccountAdmin o) {
+        accountAdminList.add( o);
         ioFileBinary.writeFile(PATH_FILE_ACCOUNT_ADMIN, accountAdminList);
     }
 
     @Override
-    public void edit(Object o) {
+    public void edit(AccountAdmin o) {
 
     }
 

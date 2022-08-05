@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserManager<E> implements Serializable, Manager<E> {
+public class UserManager implements Manager<User> {
     private static final String PATH_FILE_USER = "fileData/user.dat";
 
     private ArrayList<User> usersList;
@@ -48,14 +48,14 @@ public class UserManager<E> implements Serializable, Manager<E> {
 
 
     @Override
-    public void add(Object o) {
+    public void add(User o) {
 
-        usersList.add((User) o);
+        usersList.add( o);
         ioFileBinary.writeFile(PATH_FILE_USER,usersList);
     }
 
     @Override
-    public void edit(Object o) {
+    public void edit(User o) {
 
     }
 
