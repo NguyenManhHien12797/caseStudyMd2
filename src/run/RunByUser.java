@@ -90,8 +90,8 @@ public class RunByUser {
                         System.out.println("Chưa update!!");
                         break;
                     case 0:
-                        System.out.println(" Đã thoát khỏi hệ thống USER !!!");
-                        System.out.println("----------------------------------------------------");
+                        System.out.println("                             Đã thoát khỏi hệ thống USER !!!");
+                        System.out.println("------------------------------------------------------------------------------------");
                         Login login = new Login();
                         login.menuLogin();
                         break;
@@ -109,13 +109,13 @@ public class RunByUser {
     public void menuCategory() {
         try {
             do {
-                System.out.println("--------------------------------------------------");
-                System.out.println("                 Menu Add to cart");
-                System.out.println("1. Confectionery");
-                System.out.println("2. FastFood");
-                System.out.println("3. Vietlott");
-                System.out.println("0. Quay lại");
-                System.out.print("Mời bạn nhập lựa chọn: ");
+                System.out.println("--------------------------------------------------------------------------------------");
+                System.out.println("                             Menu Add to cart");
+                System.out.println("                             1. Confectionery");
+                System.out.println("                             2. FastFood");
+                System.out.println("                             3. Vietlott");
+                System.out.println("                             0. Quay lại");
+                System.out.print("                             Mời bạn nhập lựa chọn: ");
                 Scanner scanner = new Scanner(System.in);
                 int choice = scanner.nextInt();
                 switch (choice) {
@@ -145,9 +145,9 @@ public class RunByUser {
     }
 
     public void addConfectioneryToCart() {
-        System.out.println("-------------------------------------------------------");
-        System.out.println("                    Thêm sản phẩm");
-        System.out.print("Nhập id sản phẩm: ");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("                           Thêm sản phẩm");
+        System.out.print("                            Nhập id sản phẩm: ");
         Scanner scanner = new Scanner(System.in);
         int inputid = scanner.nextInt();
 
@@ -214,13 +214,13 @@ public class RunByUser {
     public void menuDeleteProductToCart() {
         try {
             do {
-                System.out.println("--------------------------------------------------------------------");
-                System.out.println("                       Menu Delete to cart");
-                System.out.println("1. Confectionery");
-                System.out.println("2. FastFood");
-                System.out.println("3. Vietlott");
-                System.out.println("0. Quay lại");
-                System.out.print("Mời bạn nhập lựa chọn: ");
+                System.out.println("--------------------------------------------------------------------------------------------");
+                System.out.println("                                 Menu Delete to cart");
+                System.out.println("                                 1. Confectionery");
+                System.out.println("                                 2. FastFood");
+                System.out.println("                                 3. Vietlott");
+                System.out.println("                                 0. Quay lại");
+                System.out.print("                                  Mời bạn nhập lựa chọn: ");
                 Scanner scanner = new Scanner(System.in);
                 int choice = scanner.nextInt();
                 switch (choice) {

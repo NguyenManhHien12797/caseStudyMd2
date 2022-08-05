@@ -24,10 +24,10 @@ public class Login{
     }
 
     public void login() {
-        System.out.print("Mời nhập account:");
+        System.out.print("                                  Mời nhập account:");
         Scanner scanner = new Scanner(System.in);
         String acc = scanner.nextLine();
-        System.out.print("Mời nhập password:");
+        System.out.print("                                  Mời nhập password:");
         Scanner inputPass = new Scanner(System.in);
         String pass = scanner.nextLine();
         String str = "ADMIN";
@@ -44,7 +44,7 @@ public class Login{
         a:
         do {
             displayMenu();
-            System.out.print("Nhập lựa chọn: ");
+            System.out.print("                          Nhập lựa chọn: ");
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
 
@@ -59,16 +59,18 @@ public class Login{
                 case 3:
                     System.exit(3);
                 default:
-                    System.out.println("Nhập sai rồi!");
+                    System.out.println("                    Nhập sai rồi!");
             }
         } while (true);
 
     }
 
     public void displayMenu() {
-        System.out.println("1. Đăng nhập ");
-        System.out.println("2. Đăng ký tài khoản");
-        System.out.println("3. Thoát");
+        System.out.println("--------------------------------------------------------------------------------------------");
+        System.out.println("                                Menu Login");
+        System.out.println("                                1. Đăng nhập ");
+        System.out.println("                                2. Đăng ký tài khoản");
+        System.out.println("                                3. Thoát");
     }
 
     public void loginUser(String account, String password) {
@@ -77,8 +79,8 @@ public class Login{
             runByUser.menuUser();
 
         } else {
-            System.out.println("Nhập sai rồi");
-            System.out.println("Mời nhập lại");
+            System.out.println("                            Nhập sai rồi");
+            System.out.println("                            Mời nhập lại");
             login();
         }
 
@@ -91,8 +93,8 @@ public class Login{
             runByAdmin.menuAdmin();
 
         } else {
-            System.out.println("Nhập sai rồi");
-            System.out.println("Mời nhập lại");
+            System.out.println("                                Nhập sai rồi");
+            System.out.println("                                Mời nhập lại");
             login();
         }
     }
