@@ -24,10 +24,10 @@ public class Register {
         String id = getId();
         String account = registerAccount();
         String password = registerPassword();
-        System.out.print("                                         Mời nhập tên: ");
+        System.out.print("                              Mời nhập tên: ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
-        System.out.print("                                         Mời nhập địa chỉ: ");
+        System.out.print("                              Mời nhập địa chỉ: ");
         String address = scanner.nextLine();
         String phoneNumber = registerPhoneNumber();
         String email = registerEmail();
@@ -53,7 +53,7 @@ public class Register {
         }
         while (true) {
             if (!validate.validateAccount(inputAccount)) {
-                System.out.println("                                 Mời nhập lại: ");
+                System.out.println("                               Mời nhập lại: ");
                 System.out.println("Account không chứa ký tự đặc biệt; ít nhất 8 ký tự; cho phép dấu gạch dưới ");
                 inputAccount = scanner.nextLine();
             } else {
@@ -77,11 +77,11 @@ public class Register {
 
     public String registerPassword() {
         String password;
-        System.out.print("                                    Nhập password: ");
+        System.out.print("                               Nhập password: ");
         String inputPassword = scanner.nextLine();
         while (true) {
             if (!validate.validatePassword(inputPassword)) {
-                System.out.println("                              Mời nhập lại: ");
+                System.out.println("                               Mời nhập lại: ");
                 System.out.println("Password không chứa ký tự đặc biệt; ít nhất 8 ký tự; cho phép dấu gạch dưới ");
                 inputPassword = scanner.nextLine();
             } else {
@@ -94,7 +94,7 @@ public class Register {
 
     public String registerPhoneNumber() {
         String phoneNumber;
-        System.out.print("                                         Nhập số điện thoại: ");
+        System.out.print("                               Nhập số điện thoại: ");
         String phone = scanner.nextLine();
         while (true) {
             if (!validate.validatePhoneNumber(phone)) {
@@ -112,11 +112,11 @@ public class Register {
     public String registerEmail() {
 
         String email;
-        System.out.print("                                          Nhập email: ");
+        System.out.print("                               Nhập email: ");
         String inputEmail = scanner.nextLine();
         while (true) {
             if (!validate.validateEmail(inputEmail)) {
-                System.out.println("                                   Mời nhập lại: ");
+                System.out.println("                               Mời nhập lại: ");
                 System.out.println("Email bắt đầu bằng 1 ký tự; không chứ ký tự đặc biệt, có ký tự @ ngăn cách tên email và domain; domain phải hợp lệ ");
                 inputEmail = scanner.nextLine();
             } else {
